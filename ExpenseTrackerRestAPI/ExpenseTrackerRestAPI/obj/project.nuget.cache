@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "JuIV9CRiosynpBUKjtpQnp8ZA+lBp/punGuWJzdqZzzGD5EEgGIF/JaPzSR1yY9JtiKtXpOspWOgmxFWbuaEDg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Admire\\OneDrive\\Documents\\Projects\\Expense Tracker\\ExpenseTrackerRestAPI\\ExpenseTrackerRestAPI\\ExpenseTrackerRestAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admire\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Admire\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Admire\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Admire\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Admire\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Admire\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
