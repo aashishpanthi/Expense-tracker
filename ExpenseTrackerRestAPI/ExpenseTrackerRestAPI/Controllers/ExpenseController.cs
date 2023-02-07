@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using ExpenseTrackerRestAPI.Models;
 
 namespace ExpenseTrackerRestAPI.Controllers
 {
@@ -8,36 +9,75 @@ namespace ExpenseTrackerRestAPI.Controllers
     [ApiController]
     public class ExpenseController : ControllerBase
     {
-        // GET: api/<ExpenseController>
+        private readonly IMongoCollection<Expense> _expenses;
+
+        public ExpenseController(IExpenseTrackerDatabaseSettings settings)
+        {
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+
+            _expenses = database.GetCollection<Expense>(settings.ExpensesCollectionName);
+        }
+
+        // GET: api/Expense
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<Expense>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _expenses.Find(expense => true).ToList();
         }
 
-        // GET api/<ExpenseController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET: api/Expense/5
+        [HttpGet("{id}", Name = "GetExpense")]
+        public ActionResult<Expense> Get(string id)
         {
-            return "value";
+            var expense = _expenses.Find<Expense>(e => e.Id == id).FirstOrDefault();
+
+            if (expense == null)
+            {
+                return NotFound();
+            }
+
+            return expense;
         }
 
-        // POST api/<ExpenseController>
+        // POST: api/Expense
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Expense> Post(Expense expense)
         {
+            _expenses.InsertOne(expense);
+            return CreatedAtRoute("GetExpense", new { id = expense.Id.ToString() }, expense);
         }
 
-        // PUT api/<ExpenseController>/5
+        // PUT: api/Expense/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(string id, Expense expenseIn)
         {
+            var expense = _expenses.Find<Expense>(e => e.Id == id).FirstOrDefault();
+
+            if (expense == null)
+            {
+                return NotFound();
+            }
+
+            _expenses.ReplaceOne(e => e.Id == id, expenseIn);
+
+            return NoContent();
         }
 
-        // DELETE api/<ExpenseController>/5
+        // DELETE: api/Expense/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(string id)
         {
+            var expense = _expenses.Find<Expense>(e => e.Id == id).FirstOrDefault();
+
+            if (expense == null)
+            {
+                return NotFound();
+            }
+
+            _expenses.DeleteOne(e => e.Id == id);
+
+            return NoContent();
         }
     }
 }
