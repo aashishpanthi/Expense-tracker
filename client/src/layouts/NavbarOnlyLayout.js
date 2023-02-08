@@ -24,9 +24,9 @@ function NavbarOnlyLayout({ nhost }) {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/" state={{ from: location }} replace />;
-  }
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/" state={{ from: location }} replace />;
+  // }
 
   return (
     <>

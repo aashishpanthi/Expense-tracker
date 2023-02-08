@@ -1,12 +1,11 @@
+import { Button } from "@mui/material";
 import { useCallback } from "react";
 import { useSignOut } from "@nhost/react";
-import { useAuthenticationStatus } from "@nhost/react";
 import { useNavigate } from "react-router-dom";
+import { useAuthenticationStatus } from "@nhost/react";
 import GoogleIcon from "@mui/icons-material/Google";
 
-import Button from "@mui/material/Button";
-
-function Navbar({ nhost }) {
+const Navbar = ({ nhost }) => {
   const { isAuthenticated } = useAuthenticationStatus();
 
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ function Navbar({ nhost }) {
   };
 
   return (
-    <div>
+    <nav className="navbar">
       {isAuthenticated ? (
         <Button variant="outlined" color="warning" onClick={logout}>
           Logout
@@ -39,8 +38,7 @@ function Navbar({ nhost }) {
           Login
         </Button>
       )}
-    </div>
+    </nav>
   );
-}
-
+};
 export default Navbar;
