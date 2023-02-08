@@ -12,11 +12,11 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
-export default function Routes() {
+export default function Routes({ nhost }) {
   return useRoutes([
     {
       path: "/",
-      element: <NavbarOnlyLayout />,
+      element: <NavbarOnlyLayout nhost={nhost} />,
       children: [
         { path: "", element: <Home /> },
         { path: "login", element: <Login /> },
