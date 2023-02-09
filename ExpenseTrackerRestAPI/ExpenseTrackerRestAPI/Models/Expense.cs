@@ -24,5 +24,8 @@ namespace ExpenseTrackerRestAPI.Models
 
         [BsonElement("Description")]
         public string Description { get; set; }
+
+        [BsonElement("User")]
+        public string User { get; set; }
     }
 }
