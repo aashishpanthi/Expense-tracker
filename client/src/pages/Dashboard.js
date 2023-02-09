@@ -5,6 +5,9 @@ import { TabList, Tab, Card, Text, Metric } from "@tremor/react";
 import styles from "./styles/dashboard.module.css";
 import { useState } from "react";
 
+import Summary from "../components/Summary";
+import Detailed from "../components/Detailed";
+
 export default () => {
   const [showCard, setShowCard] = useState(true);
 
@@ -24,11 +27,9 @@ export default () => {
           </TabList>
         </>
 
-        {showCard === true ? (
-          <div className="mt-6">Summary</div>
-        ) : (
-          <div className="mt-6">Detials</div>
-        )}
+        <div className={styles.contentContainer}>
+          {showCard === true ? <Summary /> : <Detailed />}
+        </div>
       </Card>
     </div>
   );
