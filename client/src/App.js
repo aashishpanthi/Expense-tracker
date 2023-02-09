@@ -1,5 +1,6 @@
 import React from "react";
 import Routes from "./routes";
+import "@tremor/react/dist/esm/tremor.css";
 
 import { NhostClient, NhostReactProvider } from "@nhost/react";
 
