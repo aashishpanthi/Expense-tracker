@@ -1,7 +1,7 @@
 import { Card, Flex, Metric, BadgeDelta, Text } from "@tremor/react";
 
 export default ({ amount }) => (
-  <Card maxWidth="max-w-sm">
+  <Card maxWidth="max-w-sm" decorationColor="indigo" decoration="top">
     <Flex justifyContent="justify-between" alignItems="items-center">
       <Text>Total Spent</Text>
       {/* <BadgeDelta
