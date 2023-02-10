@@ -63,8 +63,8 @@ const Navbar = ({ nhost }) => {
                 onClose={handleClose}
                 sx={{ mt: 1 }}
               >
-                <MenuItem>9800000000</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
+                <MenuItem><Link to="/app" className="dash">Dashboard</Link></MenuItem>
+                <MenuItem onClick={logout}><div className="dash">Logout</div></MenuItem>
               </Menu>
             </div>
           </section>
