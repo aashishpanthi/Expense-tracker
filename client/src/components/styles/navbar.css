@@ -1,0 +1,37 @@
+.navbar{
+   height: 10vh;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding-left: 50px;
+   padding-right: 50px;
+   padding-top: 5px;
+   
+}
+.logout{
+    background-color: #023047;
+    font-size: 24px;
+    font-weight: 400;
+    margin: auto;
+    text-align: center;
+    padding: 3px;
+    color: #fff;
+    border: 2px solid #7C73E6;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+.txt{
+    color: #7C73E6;
+    text-decoration: none
+}
+.google{
+    
+    width: 100%;
+}
+.or{
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+}
