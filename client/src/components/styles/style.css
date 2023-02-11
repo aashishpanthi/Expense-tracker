@@ -41,9 +41,15 @@
 }
 
 .dash {
-  color: black;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
+
+.dash span {
+  margin-right: 10px;
+}
+
 .log {
   font-size: 1.5rem;
   font-weight: 500;

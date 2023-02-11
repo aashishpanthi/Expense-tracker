@@ -1,15 +1,17 @@
 import { useCallback } from "react";
 import { useSignOut } from "@nhost/react";
 import { useNavigate } from "react-router-dom";
-import { useAuthenticationStatus } from "@nhost/react";
+import { useAuthenticationStatus, useUserEmail } from "@nhost/react";
 import { Link } from "react-router-dom";
-import Logo from "./logo192.png";
 import "./styles/style.css";
 import * as React from "react";
-import { Menu, MenuItem, Button } from "@mui/material";
+import { Menu, MenuItem, Button, Box } from "@mui/material";
+
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
   const { isAuthenticated } = useAuthenticationStatus();
+  const userEmail = useUserEmail();
 
   const navigate = useNavigate();
   const { signOut } = useSignOut();
@@ -31,7 +33,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div>
         <Link to="/">
-          <img src={Logo} height="50px" width="50px"></img>
+          <img src="/logo192.png" height="50px" width="50px" />
         </Link>
       </div>
       <div className="login_section">
@@ -54,13 +56,22 @@ const Navbar = () => {
                 onClose={handleClose}
                 sx={{ mt: 1 }}
               >
-                <MenuItem>
-                  <Link to="/app" className="dash">
-                    Dashboard
-                  </Link>
-                </MenuItem>
+                <Box
+                  sx={{
+                    mx: 2,
+                    my: 1,
+                  }}
+                >
+                  {
+                    // show the user's email address
+                    userEmail
+                  }
+                </Box>
                 <MenuItem onClick={logout}>
-                  <div className="dash">Logout</div>
+                  <div className="dash">
+                    <span>Logout</span>
+                    <LogoutIcon />
+                  </div>
                 </MenuItem>
               </Menu>
             </div>
