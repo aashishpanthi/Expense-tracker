@@ -6,7 +6,7 @@ import { useAuthenticationStatus } from "@nhost/react";
 import GoogleIcon from "@mui/icons-material/Google";
 import { Link } from "react-router-dom";
 import Logo from "./logo192.png";
-import "./styles/navbar.css";
+import "./styles/style.css";
 import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -44,7 +44,7 @@ const Navbar = ({ nhost }) => {
         </Link>
       </div>
       <div className="login_section">
-        {isAuthenticated ? (
+        
           <section>
             <div>
               <div
@@ -68,20 +68,7 @@ const Navbar = ({ nhost }) => {
               </Menu>
             </div>
           </section>
-        ) : (
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={handleGoogleSignIn}
-          >
-            <GoogleIcon
-              sx={{
-                mr: 1,
-              }}
-            />{" "}
-            Login
-          </Button>
-        )}
+        
       </div>
     </nav>
   );

@@ -12,14 +12,11 @@
     background-color: #023047;
     font-size: 24px;
     font-weight: 400;
-    margin: auto;
     text-align: center;
-    padding: 3px;
+    border-radius: 50%;
     color: #fff;
     border: 2px solid #7C73E6;
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
+    padding: 8px 10px 8px 10px;
     cursor: pointer;
 }
 .txt{
@@ -38,4 +35,10 @@
 .dash{
     color: black;
     text-decoration: none;
+}
+.log{
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
 }
