@@ -18,10 +18,10 @@ function MainRoutes({ nhost }) {
   return useRoutes([
     {
       path: "/",
-      element: <NavbarOnlyLayout nhost={nhost} />,
+      element: <NavbarOnlyLayout />,
       children: [
         { path: "", element: <Home /> },
-        { path: "login", element: <Login /> },
+        { path: "login", element: <Login nhost={nhost} /> },
         { path: "register", element: <Register /> },
         { path: "app", element: <Dashboard /> },
       ],

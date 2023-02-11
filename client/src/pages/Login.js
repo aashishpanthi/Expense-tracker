@@ -9,18 +9,26 @@ import {
   Avatar,
 } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-
+import { useSignInEmailPassword } from "@nhost/react";
 import GoogleIcon from "@mui/icons-material/Google";
-
 const theme = createTheme();
 
 export default function Login({ nhost }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const {
+    signInEmailPassword,
+    isLoading,
+    isSuccess,
+    needsEmailVerification,
+    isError,
+    error,
+  } = useSignInEmailPassword();
 
   const handleGoogleSignIn = () => {
     nhost.auth.signIn({
@@ -28,11 +36,16 @@ export default function Login({ nhost }) {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    nhost.auth.login({ email, password });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signInEmailPassword(email, password);
   };
+
+  if (isSuccess) {
+    return <Navigate to="/" replace={true} />;
+  }
+
+  const disableForm = isLoading || needsEmailVerification;
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,6 +71,7 @@ export default function Login({ nhost }) {
               color="primary"
               fullWidth
               onClick={handleGoogleSignIn}
+              disabled={disableForm}
               sx={{
                 mt: 3,
                 mb: 1,
@@ -83,6 +97,7 @@ export default function Login({ nhost }) {
               name="email"
               autoComplete="email"
               autoFocus
+              disabled={disableForm}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -96,12 +111,14 @@ export default function Login({ nhost }) {
               id="password"
               autoComplete="current-password"
               value={password}
+              disabled={disableForm}
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              disabled={disableForm}
               sx={{ mt: 3, mb: 2, height: "50px" }}
             >
               Sign In

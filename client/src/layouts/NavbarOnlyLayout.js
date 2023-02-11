@@ -5,7 +5,7 @@ import { CircularProgress } from "@mui/material";
 
 import Navbar from "../components/Navbar";
 
-function NavbarOnlyLayout({ nhost }) {
+function NavbarOnlyLayout() {
   const { isLoading } = useAuthenticationStatus();
 
   if (isLoading) {
@@ -25,7 +25,7 @@ function NavbarOnlyLayout({ nhost }) {
 
   return (
     <>
-      <Navbar nhost={nhost} />
+      <Navbar />
 
       <Outlet />
     </>
