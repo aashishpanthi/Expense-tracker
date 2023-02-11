@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { useCallback } from "react";
 import { useSignOut } from "@nhost/react";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +9,7 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-
-const Navbar = ({ nhost }) => {
+const Navbar = () => {
   const { isAuthenticated } = useAuthenticationStatus();
 
   const navigate = useNavigate();
@@ -22,11 +20,6 @@ const Navbar = ({ nhost }) => {
     navigate("/");
   }, [navigate]);
 
-  const handleGoogleSignIn = () => {
-    nhost.auth.signIn({
-      provider: "google",
-    });
-  };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -62,16 +55,19 @@ const Navbar = ({ nhost }) => {
                 onClose={handleClose}
                 sx={{ mt: 1 }}
               >
-                <MenuItem><Link to="/app" className="dash">Dashboard</Link></MenuItem>
-                <MenuItem onClick={logout}><div className="dash">Logout</div></MenuItem>
+                <MenuItem>
+                  <Link to="/app" className="dash">
+                    Dashboard
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={logout}>
+                  <div className="dash">Logout</div>
+                </MenuItem>
               </Menu>
             </div>
           </section>
         ) : (
-          <Link to="/login"
-          className="log"
-          >
-            
+          <Link to="/login" className="log">
             Login
           </Link>
         )}
