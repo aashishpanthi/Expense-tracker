@@ -3,7 +3,6 @@ import { useCallback } from "react";
 import { useSignOut } from "@nhost/react";
 import { useNavigate } from "react-router-dom";
 import { useAuthenticationStatus } from "@nhost/react";
-import GoogleIcon from "@mui/icons-material/Google";
 import { Link } from "react-router-dom";
 import Logo from "./logo192.png";
 import "./styles/style.css";
