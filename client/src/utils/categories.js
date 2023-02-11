@@ -1,0 +1,15 @@
+export default [
+  "Food",
+  "Transportation",
+  "Housing",
+  "Utilities",
+  "Clothing",
+  "Medical",
+  "Insurance",
+  "Personal",
+  "Debt",
+  "Savings",
+  "Entertainment",
+  "Gifts",
+  "Other",
+];

@@ -60,6 +60,7 @@ const Navbar = () => {
                   sx={{
                     mx: 2,
                     my: 1,
+                    fontSize: ".75rem",
                   }}
                 >
                   {
