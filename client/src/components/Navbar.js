@@ -44,7 +44,7 @@ const Navbar = ({ nhost }) => {
         </Link>
       </div>
       <div className="login_section">
-        
+        {isAuthenticated ? (
           <section>
             <div>
               <div
@@ -68,7 +68,14 @@ const Navbar = ({ nhost }) => {
               </Menu>
             </div>
           </section>
-        
+        ) : (
+          <Link to="/login"
+          className="log"
+          >
+            
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );
