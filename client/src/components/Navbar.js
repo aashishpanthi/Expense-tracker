@@ -40,16 +40,16 @@ const Navbar = () => {
         {isAuthenticated ? (
           <section>
             <div>
-              <div
+              <img
                 id="fade-button"
                 aria-controls={open ? "fade-menu" : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
-                className="logout"
-              >
-                AP
-              </div>
+                src={`https://ui-avatars.com/api/?size=128&background=random&rounded=true&name=${userEmail}`}
+                alt="avatar"
+                className="avatar"
+              />
               <Menu
                 anchorEl={anchorEl}
                 open={open}
