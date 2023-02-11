@@ -31,6 +31,7 @@ function NavbarOnlyLayout({ nhost }) {
   return (
     <>
       <Navbar nhost={nhost} />
+     
       <Outlet />
     </>
   );
