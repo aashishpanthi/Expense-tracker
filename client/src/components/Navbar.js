@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import Logo from "./logo192.png";
 import "./styles/style.css";
 import * as React from "react";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { Menu, MenuItem, Button } from "@mui/material";
 
 const Navbar = () => {
   const { isAuthenticated } = useAuthenticationStatus();
@@ -67,8 +66,15 @@ const Navbar = () => {
             </div>
           </section>
         ) : (
-          <Link to="/login" className="log">
-            Login
+          <Link
+            to={"/login"}
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            <Button variant="outlined" color="primary">
+              Login
+            </Button>
           </Link>
         )}
       </div>
