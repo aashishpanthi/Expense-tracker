@@ -22,7 +22,7 @@ function MainRoutes({ nhost }) {
       children: [
         { path: "", element: <Home /> },
         { path: "login", element: <Login nhost={nhost} /> },
-        { path: "register", element: <Register /> },
+        { path: "register", element: <Register nhost={nhost} /> },
         { path: "app", element: <Dashboard /> },
       ],
     },
