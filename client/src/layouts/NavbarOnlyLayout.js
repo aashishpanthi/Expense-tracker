@@ -1,13 +1,12 @@
 import React from "react";
-import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useAuthenticationStatus } from "@nhost/react";
 import { CircularProgress } from "@mui/material";
 
 import Navbar from "../components/Navbar";
 
 function NavbarOnlyLayout({ nhost }) {
-  const { isAuthenticated, isLoading } = useAuthenticationStatus();
-  const location = useLocation();
+  const { isLoading } = useAuthenticationStatus();
 
   if (isLoading) {
     return (
@@ -24,14 +23,10 @@ function NavbarOnlyLayout({ nhost }) {
     );
   }
 
-  // if (!isAuthenticated) {
-  //   return <Navigate to="/" state={{ from: location }} replace />;
-  // }
-
   return (
     <>
       <Navbar nhost={nhost} />
-     
+
       <Outlet />
     </>
   );
