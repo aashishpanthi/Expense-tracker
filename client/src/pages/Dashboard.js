@@ -5,13 +5,16 @@ import AddIcon from "@mui/icons-material/Add";
 
 import { TabList, Tab, Card, Text, Metric } from "@tremor/react";
 import styles from "./styles/dashboard.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Summary from "../components/Summary";
 import Detailed from "../components/Detailed";
 import AddNew from "../components/AddNew";
 
+import { useUserEmail } from "@nhost/react";
+
 import { Button, Box } from "@mui/material";
+import axios from "axios";
 
 export default () => {
   const [showCard, setShowCard] = useState(true);
@@ -19,6 +22,46 @@ export default () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [expense, setExpense] = useState(0);
+
+  const userEmail = useUserEmail();
+  const [data, setData] = useState([]);
+
+  const getAllExpenses = async () => {
+    try {
+      const allexpenses = await axios.get("/api/Expense");
+
+      console.log(allexpenses.data);
+
+      // filter by useremail
+
+      const userexpenses = allexpenses.data.map((expense) => {
+        if (expense.user === userEmail) {
+          return expense;
+        } else {
+          return null;
+        }
+      });
+
+      console.log("userexpenses" + userexpenses);
+
+      setData(userexpenses);
+
+      // calculate total expense
+      const totalExpense = userexpenses.reduce((acc, expense) => {
+        return acc + parseInt(expense?.amount);
+      }, 0);
+
+      totalExpense && setExpense(totalExpense);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllExpenses();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -31,7 +74,12 @@ export default () => {
         >
           <div>
             <Text>Total Spent</Text>
-            <Metric>$ 442,276</Metric>
+            <Metric>
+              {Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(expense)}
+            </Metric>
           </div>
 
           <Button onClick={handleOpen}>
@@ -49,7 +97,11 @@ export default () => {
         </TabList>
 
         <div className={styles.contentContainer}>
-          {showCard === true ? <Summary /> : <Detailed />}
+          {showCard === true ? (
+            <Summary data={data} />
+          ) : (
+            <Detailed data={data} />
+          )}
         </div>
       </Card>
 

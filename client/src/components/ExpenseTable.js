@@ -18,26 +18,11 @@ import {
   Tooltip,
 } from "@mui/material";
 
+import moment from "moment";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-
-const rows = [
-  {
-    expenseName: "Cupcake",
-    amount: 305,
-    category: 3.7,
-    description: 67,
-    date: 4.3,
-  },
-  {
-    expenseName: "Laptop",
-    amount: 200,
-    category: 4.2,
-    description: 60,
-    date: 4.3,
-  },
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -207,12 +192,13 @@ function EnhancedTableToolbar(props) {
   );
 }
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ data }) {
+  const rows = data;
+
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("expenseName");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
-  const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {
@@ -259,10 +245,6 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -277,7 +259,7 @@ export default function EnhancedTable() {
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            size={"medium"}
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -324,14 +306,16 @@ export default function EnhancedTable() {
                       <TableCell align="right">{row.amount}</TableCell>
                       <TableCell align="right">{row.category}</TableCell>
                       <TableCell align="right">{row.description}</TableCell>
-                      <TableCell align="right">{row.date}</TableCell>
+                      <TableCell align="right">
+                        {moment(row.date).format("DD/MM/YYYY")}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 53 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />
