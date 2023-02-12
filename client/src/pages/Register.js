@@ -21,8 +21,14 @@ export default function Register({ nhost }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signUpEmailPassword, isLoading, isSuccess, needsEmailVerification } =
-    useSignUpEmailPassword();
+  const {
+    signUpEmailPassword,
+    isLoading,
+    isSuccess,
+    needsEmailVerification,
+    error,
+    isError,
+  } = useSignUpEmailPassword();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,79 +66,109 @@ export default function Register({ nhost }) {
           <Typography component="h1" variant="h4">
             Sign up
           </Typography>
-          <div className="google">
-            <Button
-              variant="outlined"
-              color="primary"
-              fullWidth
-              onClick={handleGoogleSignUp}
-              disabled={disableForm}
-              sx={{
-                mt: 3,
-                mb: 1,
-                height: "50px",
+          {needsEmailVerification ? (
+            <p
+              style={{
+                color: "green",
+                textAlign: "center",
+                marginTop: "20px",
+                fontSize: "16px",
               }}
             >
-              <GoogleIcon
-                sx={{
-                  mr: 3,
-                }}
-              />{" "}
-              Sign Up With Google
-            </Button>
-          </div>
-          <span className="or">OR</span>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              disabled={disableForm}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              disabled={disableForm}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              disabled={disableForm}
-              sx={{ mt: 3, mb: 2, height: "50px" }}
-            >
-              Sign Up
-            </Button>
+              Please check your mailbox and follow the verification link to
+              verify your email.
+            </p>
+          ) : (
+            <>
+              <div className="google">
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  fullWidth
+                  onClick={handleGoogleSignUp}
+                  disabled={disableForm}
+                  sx={{
+                    mt: 3,
+                    mb: 1,
+                    height: "50px",
+                  }}
+                >
+                  <GoogleIcon
+                    sx={{
+                      mr: 3,
+                    }}
+                  />{" "}
+                  Sign Up With Google
+                </Button>
+              </div>
+              <span className="or">OR</span>
+              <Box
+                component="form"
+                onSubmit={handleSubmit}
+                noValidate
+                sx={{ mt: 1 }}
+              >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  disabled={disableForm}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={password}
+                  disabled={disableForm}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-            <Grid container>
-              <Grid item>
-                <p className="txt">
-                  Already have an account?
-                  <Link to="/login">Sign In</Link>
-                </p>
-              </Grid>
-            </Grid>
-          </Box>
+                {isError ? (
+                  <p
+                    style={{
+                      color: "red",
+                      textAlign: "center",
+                      marginTop: "10px",
+                      fontSize: "14px",
+                    }}
+                  >
+                    {error?.message}
+                  </p>
+                ) : null}
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  disabled={disableForm}
+                  sx={{ mt: 3, mb: 2, height: "50px" }}
+                >
+                  Sign Up
+                </Button>
+
+                <Grid container>
+                  <Grid item>
+                    <p className="txt">
+                      Already have an account?
+                      <Link to="/login">Sign In</Link>
+                    </p>
+                  </Grid>
+                </Grid>
+              </Box>
+            </>
+          )}
         </Box>
       </Container>
     </ThemeProvider>

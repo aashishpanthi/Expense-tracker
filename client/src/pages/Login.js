@@ -114,6 +114,19 @@ export default function Login({ nhost }) {
               disabled={disableForm}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {isError ? (
+              <p
+                style={{
+                  color: "red",
+                  textAlign: "center",
+                  marginTop: "10px",
+                  fontSize: "14px",
+                }}
+              >
+                {error?.message}
+              </p>
+            ) : null}
+
             <Button
               type="submit"
               fullWidth
