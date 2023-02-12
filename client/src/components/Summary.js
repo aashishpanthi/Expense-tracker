@@ -1,27 +1,11 @@
 import React from "react";
-import { DonutChart } from "@tremor/react";
+import Charts from "./Charts";
 
 function Summary({ data, expense }) {
-  const valueFormatter = (number) =>
-    `$ ${Intl.NumberFormat("us").format(number).toString()}`;
-
   return (
     <div>
       {data[0] ? (
-        <DonutChart
-          data={data}
-          category="amount"
-          dataKey="expenseName"
-          colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
-          variant="donut"
-          valueFormatter={valueFormatter}
-          label={valueFormatter(expense)}
-          showLabel={true}
-          showTooltip={true}
-          showAnimation={true}
-          height="h-44"
-          marginTop="mt-0"
-        />
+        <Charts data={data} expense={expense} />
       ) : (
         <p
           style={{

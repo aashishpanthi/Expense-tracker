@@ -93,7 +93,7 @@ export default () => {
           {showCard === true ? (
             <Summary expense={expense} data={data} />
           ) : (
-            <Detailed data={data} />
+            <Detailed update={setUpdate} data={data} />
           )}
         </div>
       </Card>

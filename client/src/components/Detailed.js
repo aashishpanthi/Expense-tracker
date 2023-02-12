@@ -1,11 +1,11 @@
 import React from "react";
 import ExpenseTable from "./ExpenseTable";
 
-function Detailed({ data }) {
+function Detailed({ update, data }) {
   return (
     <div>
       {data[0] ? (
-        <ExpenseTable data={data} />
+        <ExpenseTable update={update} data={data} />
       ) : (
         <p
           style={{
