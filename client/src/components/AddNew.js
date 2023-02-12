@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import ExpenseModal from "./ExpenseModal";
 import { TextField, Stack, Button, Autocomplete } from "@mui/material";
 
@@ -30,9 +29,14 @@ function AddNew({ open, handleClose }) {
   const handleSave = async (event) => {
     event.preventDefault();
 
+    const id = `${new Date().getTime()}09812391728974874387787`.slice(0, 24);
+
+    console.log(id);
+    console.log(id.length);
+
     try {
       const expense = {
-        id: uuidv4(),
+        id: id,
         ...values,
         user: userEmail,
       };

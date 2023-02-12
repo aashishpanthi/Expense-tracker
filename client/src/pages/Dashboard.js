@@ -34,17 +34,14 @@ export default () => {
 
       console.log(allexpenses.data);
 
+      console.log(userEmail);
+
       // filter by useremail
+      const userexpenses = allexpenses.data.filter(
+        (expense) => expense.user === userEmail
+      );
 
-      const userexpenses = allexpenses.data.map((expense) => {
-        if (expense.user === userEmail) {
-          return expense;
-        } else {
-          return null;
-        }
-      });
-
-      console.log("userexpenses" + userexpenses);
+      console.log(userexpenses);
 
       setData(userexpenses);
 
