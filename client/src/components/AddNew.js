@@ -7,7 +7,7 @@ import moment from "moment";
 import axios from "axios";
 import { useUserEmail } from "@nhost/react";
 
-function AddNew({ open, handleClose }) {
+function AddNew({ open, handleClose, update }) {
   const [values, setValues] = useState({
     expenseName: "",
     category: "",
@@ -15,6 +15,8 @@ function AddNew({ open, handleClose }) {
     date: moment(),
     description: "",
   });
+
+  const [error, setError] = useState("");
 
   const userEmail = useUserEmail();
 
@@ -31,9 +33,6 @@ function AddNew({ open, handleClose }) {
 
     const id = `${new Date().getTime()}09812391728974874387787`.slice(0, 24);
 
-    console.log(id);
-    console.log(id.length);
-
     try {
       const expense = {
         id: id,
@@ -42,8 +41,12 @@ function AddNew({ open, handleClose }) {
       };
 
       await axios.post("/api/Expense", expense);
+
+      handleClose();
+      update((prev) => prev + 1);
     } catch (error) {
       console.log(error);
+      setError(error?.response?.data?.message);
     }
   };
 
@@ -123,6 +126,19 @@ function AddNew({ open, handleClose }) {
             renderInput={(params) => <TextField {...params} label="Category" />}
           />
         </Stack>
+
+        {error && (
+          <p
+            style={{
+              color: "red",
+              textAlign: "center",
+              marginTop: "1rem",
+              fontSize: "14px",
+            }}
+          >
+            {error}
+          </p>
+        )}
 
         <Button
           variant="contained"

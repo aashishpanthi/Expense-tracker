@@ -28,26 +28,22 @@ export default () => {
   const userEmail = useUserEmail();
   const [data, setData] = useState([]);
 
+  const [update, setUpdate] = useState(0);
+
   const getAllExpenses = async () => {
     try {
       const allexpenses = await axios.get("/api/Expense");
-
-      console.log(allexpenses.data);
-
-      console.log(userEmail);
 
       // filter by useremail
       const userexpenses = allexpenses.data.filter(
         (expense) => expense.user === userEmail
       );
 
-      console.log(userexpenses);
-
       setData(userexpenses);
 
       // calculate total expense
       const totalExpense = userexpenses.reduce((acc, expense) => {
-        return acc + parseInt(expense?.amount);
+        return acc + expense?.amount;
       }, 0);
 
       totalExpense && setExpense(totalExpense);
@@ -58,7 +54,7 @@ export default () => {
 
   useEffect(() => {
     getAllExpenses();
-  }, []);
+  }, [update]);
 
   return (
     <div className={styles.container}>
@@ -102,7 +98,7 @@ export default () => {
         </div>
       </Card>
 
-      <AddNew open={open} handleClose={handleClose} />
+      <AddNew open={open} update={setUpdate} handleClose={handleClose} />
     </div>
   );
 };
