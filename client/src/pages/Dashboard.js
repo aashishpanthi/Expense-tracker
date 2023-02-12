@@ -91,7 +91,7 @@ export default () => {
 
         <div className={styles.contentContainer}>
           {showCard === true ? (
-            <Summary data={data} />
+            <Summary expense={expense} data={data} />
           ) : (
             <Detailed data={data} />
           )}
