@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 
 import moment from "moment";
-import axios from "axios";
+import axios from "../utils/axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
@@ -210,9 +210,7 @@ export default function EnhancedTable({ data, update }) {
   const handleDelete = async () => {
     try {
       for (let i = 0; i < selected.length; i++) {
-        await axios.delete(
-          `http://64.227.164.205:5000/api/Expense/${selected[i]}`
-        );
+        await axios.delete(`api/Expense/${selected[i]}`);
       }
 
       update((prev) => prev + 1);

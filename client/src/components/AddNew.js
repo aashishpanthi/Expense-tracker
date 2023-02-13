@@ -4,7 +4,7 @@ import { TextField, Stack, Button, Autocomplete } from "@mui/material";
 
 import categories from "../utils/categories";
 import moment from "moment";
-import axios from "axios";
+import axios from "../utils/axios";
 import { useUserEmail } from "@nhost/react";
 
 function AddNew({ open, handleClose, update }) {
@@ -40,7 +40,7 @@ function AddNew({ open, handleClose, update }) {
         user: userEmail,
       };
 
-      await axios.post("http://64.227.164.205:5000/api/Expense", expense);
+      await axios.post("api/Expense", expense);
 
       handleClose();
       update((prev) => prev + 1);

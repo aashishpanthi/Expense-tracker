@@ -14,7 +14,7 @@ import AddNew from "../components/AddNew";
 import { useUserEmail } from "@nhost/react";
 
 import { Button, Box } from "@mui/material";
-import axios from "axios";
+import axios from "../utils/axios";
 
 export default () => {
   const [showCard, setShowCard] = useState(true);
@@ -32,9 +32,7 @@ export default () => {
 
   const getAllExpenses = async () => {
     try {
-      const allexpenses = await axios.get(
-        "http://64.227.164.205:5000/api/Expense"
-      );
+      const allexpenses = await axios.get("api/Expense");
 
       // filter by useremail
       const userexpenses = allexpenses.data.filter(
