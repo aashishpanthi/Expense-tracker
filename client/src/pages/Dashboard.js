@@ -14,7 +14,7 @@ import AddNew from "../components/AddNew";
 import { useUserEmail } from "@nhost/react";
 
 import { Button, Box } from "@mui/material";
-import axios from "../utils/axios";
+import axios from "axios";
 
 export default () => {
   const [showCard, setShowCard] = useState(true);
