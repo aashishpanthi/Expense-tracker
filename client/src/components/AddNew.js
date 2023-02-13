@@ -4,7 +4,7 @@ import { TextField, Stack, Button, Autocomplete } from "@mui/material";
 
 import categories from "../utils/categories";
 import moment from "moment";
-import axios from "axios";
+import axios from "../utils/axios";
 import { useUserEmail } from "@nhost/react";
 
 function AddNew({ open, handleClose, update }) {
