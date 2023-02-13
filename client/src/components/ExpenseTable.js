@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 
 import moment from "moment";
-import axios from "../utils/axios";
+import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
