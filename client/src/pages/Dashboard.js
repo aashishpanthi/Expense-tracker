@@ -32,7 +32,7 @@ export default () => {
 
   const getAllExpenses = async () => {
     try {
-      const allexpenses = await axios.get("/api/Expense");
+      const allexpenses = await axios.get("api/Expense");
 
       // filter by useremail
       const userexpenses = allexpenses.data.filter(

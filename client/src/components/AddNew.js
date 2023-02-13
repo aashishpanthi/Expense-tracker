@@ -40,7 +40,7 @@ function AddNew({ open, handleClose, update }) {
         user: userEmail,
       };
 
-      await axios.post("/api/Expense", expense);
+      await axios.post("api/Expense", expense);
 
       handleClose();
       update((prev) => prev + 1);
