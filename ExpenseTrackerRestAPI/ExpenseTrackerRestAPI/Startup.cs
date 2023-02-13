@@ -29,6 +29,8 @@ namespace ExpenseTrackerRestAPI
 
             services.AddControllers();
 
+            services.AddCors();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Expense Tracker API", Version = "v1" });
@@ -44,6 +46,11 @@ namespace ExpenseTrackerRestAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(builder =>
+               builder.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod());
 
             app.UseRouting();
 
