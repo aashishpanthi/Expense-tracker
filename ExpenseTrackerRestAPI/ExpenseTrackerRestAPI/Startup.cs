@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ExpenseTrackerRestAPI.Models;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+
 
 namespace ExpenseTrackerRestAPI
 {
@@ -29,13 +31,15 @@ namespace ExpenseTrackerRestAPI
 
             services.AddControllers();
 
-            services.AddCors();
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.WithOrigins("http://localhost:3000", "https://expense-tracker-frontend.vercel.app", "https://expense-tracker-budgetly.netlify.app");
+            corsBuilder.AllowCredentials();
+
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowOrigin",
-                    builder => builder.WithOrigins("https://expense-tracker-aashishpanthi.vercel.app")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
+                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
             });
 
             services.AddSwaggerGen(c =>
@@ -54,12 +58,7 @@ namespace ExpenseTrackerRestAPI
 
             app.UseHttpsRedirection();
 
-            app.UseCors(builder =>
-               builder.AllowAnyOrigin()
-                  .AllowAnyHeader()
-                  .AllowAnyMethod());
-
-            app.UseCors("AllowOrigin");
+            app.UseCors("SiteCorsPolicy");
 
             app.UseRouting();
 
