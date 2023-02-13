@@ -40,7 +40,7 @@ function AddNew({ open, handleClose, update }) {
         user: userEmail,
       };
 
-      await axios.post("api/Expense", expense);
+      await axios.post("http://64.227.164.205:5000/api/Expense", expense);
 
       handleClose();
       update((prev) => prev + 1);
