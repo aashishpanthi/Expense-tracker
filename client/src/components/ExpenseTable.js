@@ -210,7 +210,7 @@ export default function EnhancedTable({ data, update }) {
   const handleDelete = async () => {
     try {
       for (let i = 0; i < selected.length; i++) {
-        await axios.delete(`api/Expense/${selected[i]}`);
+        await axios.delete(`/api/Expense/${selected[i]}`);
       }
 
       update((prev) => prev + 1);
