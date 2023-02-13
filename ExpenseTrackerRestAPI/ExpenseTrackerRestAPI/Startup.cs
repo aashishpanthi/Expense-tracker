@@ -30,6 +30,13 @@ namespace ExpenseTrackerRestAPI
             services.AddControllers();
 
             services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                    builder => builder.WithOrigins("https://expense-tracker-aashishpanthi.vercel.app")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -51,6 +58,8 @@ namespace ExpenseTrackerRestAPI
                builder.AllowAnyOrigin()
                   .AllowAnyHeader()
                   .AllowAnyMethod());
+
+            app.UseCors("AllowOrigin");
 
             app.UseRouting();
 
