@@ -14,7 +14,13 @@ namespace ExpenseTrackerRestAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureKestrel(serverOptions =>
+                        {
+                            serverOptions.Limits.MinRequestBodyDataRate =
+                                new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(10));
+                        })
+                        .UseStartup<Startup>();
+                    
                     webBuilder.UseUrls("http://0.0.0.0:5000");
                 });
     }
