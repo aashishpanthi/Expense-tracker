@@ -34,7 +34,7 @@ namespace ExpenseTrackerRestAPI
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
             corsBuilder.AllowAnyMethod();
-            corsBuilder.WithOrigins("http://localhost:3000", "https://expense-tracker-frontend.vercel.app", "https://expense-tracker-budgetly.netlify.app");
+            corsBuilder.WithOrigins("http://localhost:3000", "http://localhost:3001","http://64.227.164.205:3001/", "https://expense-tracker-frontend.vercel.app", "https://expense-tracker-budgetly.netlify.app");
             corsBuilder.AllowCredentials();
 
             services.AddCors(options =>
